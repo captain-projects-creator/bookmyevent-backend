@@ -1,0 +1,70 @@
+/* --- base styles (keeps your existing theme + added animations and cards) --- */
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --accent: #007bff;
+  --muted: #6b7280;
+}
+* { box-sizing: border-box; }
+body { margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:#111827; }
+.header { padding: 18px 24px; }
+
+/* layout */
+.layout { display:grid; grid-template-columns:1fr 380px; gap:20px; max-width:1200px; margin:20px auto; padding:0 16px; align-items:start; }
+.left { background:var(--card); padding:16px; border-radius:8px; box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+.right .right-card { position:sticky; top:20px; background:var(--card); padding:16px; border-radius:8px; box-shadow:0 6px 18px rgba(15,23,42,0.04); }
+#calendar { max-width:100%; min-height:360px; }
+
+/* --- events strip + cards --- */
+.events-strip { list-style:none;padding:8px 6px;margin:0; display:flex; gap:12px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+.events-strip::-webkit-scrollbar { height:10px; }
+.events-strip::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius:10px; }
+
+.event-card { flex:0 0 260px; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(2,6,23,0.06); padding:12px; display:flex; flex-direction:column; gap:8px; transition: transform .18s ease, box-shadow .18s ease; }
+.event-card:hover { transform: translateY(-6px) scale(1.01); box-shadow:0 18px 36px rgba(2,6,23,0.12); }
+.event-card img { width:100%; height:140px; object-fit:cover; border-radius:8px; transition: transform .28s ease; }
+.event-card img:hover { transform: scale(1.02); }
+.event-title { font-weight:700; font-size:1rem; }
+.event-meta { color:var(--muted); font-size:13px; }
+
+/* badges & buttons */
+.badge { padding:6px 8px; border-radius:999px; font-weight:600; font-size:13px; min-width:60px; text-align:center; }
+.badge.available { background:#ecfdf5; color:#059669; border:1px solid #bbf7d0; }
+.badge.full { background:#fff1f2; color:#e11d48; border:1px solid #fecaca; }
+
+.btn { border:none; background:var(--accent); color:white; padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:600; font-size:13px; transition: transform .12s ease, box-shadow .12s ease; box-shadow:0 6px 14px rgba(2,6,23,0.06); }
+.btn:hover { transform: translateY(-2px); box-shadow:0 12px 20px rgba(2,6,23,0.10); }
+.btn.small { padding:6px 8px; font-size:12px; }
+.btn.ghost { background:transparent; border:1px solid #e6f0ff; color:var(--accent); box-shadow:none; }
+
+/* mini-panel & layout additions */
+.small-tab { flex:1; padding:6px 8px; border-radius:6px; border:1px solid #eef2ff; background:#fff; cursor:pointer; }
+.small-tab.active { background:#eef2ff; font-weight:600; }
+#userPanel input { width:100%; padding:8px 10px; margin-top:8px; border:1px solid #e6e9ee; border-radius:6px; }
+#userPanel .btn { padding:8px 12px; border-radius:8px; }
+#userPanel .btn.secondary { background:transparent; border:1px solid #e6f0ff; color:#111827; }
+
+/* header right welcome + logout */
+#rightControls { display:flex; align-items:center; gap:12px; }
+#rightControls #welcomeMsg { font-weight:600; color:#111827; }
+
+/* scroll left/right buttons */
+.scroll-left, .scroll-right { position:absolute; top:50%; transform:translateY(-50%); width:36px;height:36px;border-radius:18px; border:none;background:rgba(0,0,0,0.5); color:#fff; cursor:pointer; z-index:200; display:flex; align-items:center; justify-content:center; }
+.scroll-left { left:6px; }
+.scroll-right { right:6px; }
+
+/* misc */
+.muted { color:var(--muted); font-size:14px; margin-top:8px; }
+.visually-hidden { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+
+/* animations */
+@keyframes fadeSlideUp { from { opacity:0; transform: translateY(8px) } to { opacity:1; transform: translateY(0) } }
+.event-card { animation: fadeSlideUp .28s ease both; }
+
+/* small responsive tweaks */
+@media (max-width:900px) {
+  .layout { grid-template-columns:1fr; }
+  .right .right-card { position:relative; top:auto; margin-top:12px; }
+  .event-card { flex:0 0 80%; min-width:200px; }
+  .scroll-left, .scroll-right { display:none; }
+}

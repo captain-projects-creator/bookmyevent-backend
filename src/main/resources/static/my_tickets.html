@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>My Tickets</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .tickets-container { max-width: 980px; margin: 24px auto; padding: 12px; }
+        .ticket-card { display:flex; gap:16px; padding:14px; background:#fff; border-radius:12px; box-shadow:0 6px 18px rgba(15,23,42,0.06); margin-bottom:12px; align-items:center; }
+        .ticket-info { flex:1; }
+        .ticket-title { font-weight:700; margin-bottom:6px; }
+        .ticket-meta { color:#6b7280; font-size:13px; margin-bottom:8px; }
+        .ticket-actions { display:flex; gap:8px; flex-direction:column; align-items:flex-end; }
+        .qr-preview { width:120px; height:120px; object-fit:contain; border:1px solid #f1f5f9; border-radius:8px; background:#fafafa; padding:6px; }
+        .muted { color:#6b7280; }
+        .center { text-align:center; margin-bottom:12px; }
+        .back-btn {
+            display:inline-block;
+            margin:12px auto;
+            padding:8px 14px;
+            background:#007bff;
+            color:#fff;
+            text-decoration:none;
+            border-radius:6px;
+            font-weight:600;
+        }
+        .back-btn:hover {
+            background:#0056b3;
+        }
+    </style>
+</head>
+<body>
+<header style="text-align:center;padding:18px;">
+    <h1>My Tickets</h1>
+    <!-- 🔙 Back button -->
+    <a href="index.html" class="back-btn">← Back to Events</a>
+</header>
+
+<main class="tickets-container">
+    <div id="ticketsList"></div>
+    <div id="noTickets" class="muted" style="display:none;">You have no booked tickets.</div>
+</main>
+
+<script src="my_tickets.js"></script>
+</body>
+</html>

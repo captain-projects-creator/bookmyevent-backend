@@ -1,0 +1,36 @@
+# Flutter/Dart
+.dart_tool/
+.packages
+.pub-cache/
+build/
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-serialized
+.idea/
+.vscode/
+android/.gradle/
+**/android/.gradle
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/Runner.xcworkspace/
+*.iml
+*.ipr
+*.iws
+*.keystore
+*.jks
+*.lock
+.flutter-plugins
+*.log
+
+# macOS & Windows & Linux
+.DS_Store
+Thumbs.db
+*.so
+*.dll
+*.exe
+
+# Local sensitive
+.env
+secrets.json
