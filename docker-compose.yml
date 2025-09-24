@@ -1,37 +1,38 @@
-version: "3.9"
-services:
-  db:
-    image: postgres:15
-    container_name: event-booking-db
-    restart: always
-    env_file:
-      - .env
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
+version: "3.8"
 
-  app:
+services:
+  backend:
     build: .
-    container_name: event-booking-app
-    restart: always
+    container_name: event-booking-backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/event_booking
+      - SPRING_DATASOURCE_USERNAME=eventuser
+      - SPRING_DATASOURCE_PASSWORD=eventpass
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - JWT_SECRET=${JWT_SECRET}
+      - SERVER_PORT=8083
     depends_on:
       - db
     ports:
-      - "8083:8083"
-    env_file:
-      - .env
-    environment:
-      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-      SERVER_PORT: ${SERVER_PORT}
-      JWT_SECRET: ${JWT_SECRET}
+      - "3000:8083"   # host 3000 -> container 8083 (so you can access http://EC2:3000)
+    restart: always
 
+  db:
+    image: postgres:15
+    container_name: event-booking-db
+    environment:
+      - POSTGRES_DB=event_booking
+      - POSTGRES_USER=eventuser
+      - POSTGRES_PASSWORD=eventpass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eventuser -d event_booking"]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+    ports:
+      - "5432:5432"   # optional: expose on host (useful for local debugging)
 
 volumes:
-  db_data:
+  postgres_data:
