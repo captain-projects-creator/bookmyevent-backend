@@ -34,3 +34,8 @@ Thumbs.db
 # Local sensitive
 .env
 secrets.json
+/target/
+/*.jar
+/.env
+*.log
+.idea/
