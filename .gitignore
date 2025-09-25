@@ -39,3 +39,8 @@ secrets.json
 /.env
 *.log
 .idea/
+/target/
+/*.jar
+/.env
+*.log
+.idea/
